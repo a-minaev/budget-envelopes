@@ -10,23 +10,25 @@ router.param('id', (req, res, next, id) => {
 });
 
 router.get('/envelopes', (req, res, next) => {
-    res.send(envelopeList); 
+    res.status(200).send(envelopeList); 
 });
 
 router.get('/envelope/{id}', (req, res, next) => {
-    var envelopeToSend;
+
     envelopeList.forEach((envelope) => {if (envelope.id == req.id) {
-        envelopeToSend = envelope;
+        res.status(200).send(envelope);
     }});
-    res.send(envelopeToSend);
+    res.status(404).send();
+    
 });
 
 router.put('/envelope/{id}', (req, res, next) => {
 
     envelopeList.forEach((envelope) => {if (envelope.id == req.id){
         envelope.addAmount(req.query.amount);
-        res.send('Deposited amount');
+        res.status(200).send('Deposited amount');
     }})
+    res.status(404).send('Envelope with that ID does not exist');
 });
 
 
