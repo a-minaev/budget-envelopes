@@ -5,7 +5,8 @@ const envelopeList = require('./database');
 const envelope = {id:1, name:'Groceries'};
 
 router.param('id', (req, res, next, id) => {
-    req.id = id;
+    req.id = Number(id);
+    console.log(req.id);
     next();
 });
 
@@ -15,9 +16,11 @@ router.get('/envelopes', (req, res, next) => {
 
 router.get('/envelope/{id}', (req, res, next) => {
 
-    envelopeList.forEach((envelope) => {if (envelope.id == req.id) {
-        res.status(200).send(envelope);
-    }});
+    envelopeList.forEach((envelope) => {console.log(envelope.id); 
+        if (envelope.id == req.id) {
+            res.status(200).send(envelope);
+        }
+    });
     res.status(404).send();
     
 });
