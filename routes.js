@@ -14,7 +14,7 @@ router.get('/envelopes', (req, res, next) => {
     res.status(200).send(envelopeList); 
 });
 
-router.get('/envelope/{id}', (req, res, next) => {
+router.get('/envelope/:id', (req, res, next) => {
 
     envelopeList.forEach((envelope) => {console.log(envelope.id); 
         if (envelope.id == req.id) {
@@ -25,7 +25,7 @@ router.get('/envelope/{id}', (req, res, next) => {
     
 });
 
-router.put('/envelope/{id}', (req, res, next) => {
+router.put('/envelope/:id', (req, res, next) => {
 
     envelopeList.forEach((envelope) => {if (envelope.id == req.id){
         envelope.addAmount(req.query.amount);
