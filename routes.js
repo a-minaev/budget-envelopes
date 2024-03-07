@@ -46,8 +46,8 @@ router.put('/envelope/:id/withdraw', (req, res, next) => {
 });
 
 router.put('/transfer', (req,res,next) => {
-    const transferFrom = req.query.account1
-    const transferTo = req.query.account2
+    const transferFrom = req.query.accountFrom
+    const transferTo = req.query.accountTo
 
     try{
         envelopeList.forEach((envelope) => {if (envelope.id == transferFrom){
