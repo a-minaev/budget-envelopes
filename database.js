@@ -16,14 +16,27 @@ const Envelope = class {
     }
 
     addAmount(amount){
-        this.amount += amount;
+        if(this.checkAmountType(amount)){
+            this.amount += Number(amount);
+        }
     }
 
     withdrawAmount(amount){
-        if(this.amount<amount){
-            throw new Error(`Insufficient funds in ${this.name}`)
+        if(this.checkAmountType(amount)){
+            if(this.amount<amount){
+                throw new Error(`Insufficient funds in ${this.name}`);
+            } else {
+                this.amount -= Number(amount);
+            }
+        }
+        
+    }
+
+    checkAmountType(amount){
+        if(Number(amount)){
+            return true;
         } else {
-            this.amount -= amount;
+            throw new Error('Provided amount is not an integer');
         }
     }
 };
