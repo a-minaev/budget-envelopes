@@ -21,7 +21,7 @@ const Envelope = class {
 
     withdrawAmount(amount){
         if(this.amount<amount){
-            throw Error = new Error(`Insufficient funds in ${this.name}`)
+            throw new Error(`Insufficient funds in ${this.name}`)
         } else {
             this.amount -= amount;
         }
