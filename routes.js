@@ -25,7 +25,7 @@ router.get('/envelope/:id', (req, res, next) => {
     
 });
 
-router.put('/envelope/:id', (req, res, next) => {
+router.put('/envelope/:id/deposit', (req, res, next) => {
 
     envelopeList.forEach((envelope) => {if (envelope.id == req.id){
         envelope.addAmount(req.query.amount);
@@ -34,6 +34,33 @@ router.put('/envelope/:id', (req, res, next) => {
     res.status(404).send('Envelope with that ID does not exist');
 });
 
+router.put('/envelope/:id/withdraw', (req, res, next) => {
+    try{
+        envelopeList.forEach((envelope) => {if (envelope.id == req.id){
+            envelope.withdrawAmount(req.query.amount);
+            res.status(200).send(`We've withdrawn ${req.query.amount} from ${envelope.name}`);
+        }})
+    } catch(err){
+        next(err);
+    }
+});
+
+router.put('/transfer', (req,res,next) => {
+    const transferFrom = req.query.account1
+    const transferTo = req.query.account2
+
+    try{
+        envelopeList.forEach((envelope) => {if (envelope.id == transferFrom){
+            envelope.withdrawAmount(req.query.amount);
+        }})
+        envelopeList.forEach((envelope) => {if (envelope.id == transferTo){
+            envelope.addAmount(req.query.amount);
+            res.status(200).send(`Amount successfully transfered`);
+        }})
+    } catch(err) {
+        next(err)
+    }
+});
 
 
 
