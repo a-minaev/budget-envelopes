@@ -7,3 +7,6 @@ const pool = new pg.Pool({
     password: 'postgres',
     port: 5432
 });
+
+
+module.exports = pool;
