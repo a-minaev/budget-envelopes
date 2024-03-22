@@ -1,13 +1,14 @@
 const pool = require('./config');
 
 
-const getEnvelopes = ((req, res, next) => {
-    console.log('getEnvelopes is invoked');
-    pool.query('SELECT * FROM envelopes', (error, results)=>{
+const getEnvelopes =  (async (req, res, next) => {
+    console.log('invoking getEnvelopes');
+    await pool.query("SELECT * FROM envelopes", (error, results)=>{
         if(error){
             console.log('error in query');
             next(error);
         }
+
         else {
             console.log('error in response');
             res.status(200).json(results.rows).send();
@@ -20,7 +21,8 @@ const getEnvelope = ((req, res, next) => {
         if(error){
             next(error);
         }
-        else res.status(200).json(results.rows);
+        else res.status(200).json(results
+            .rows);
     })
 })
 
