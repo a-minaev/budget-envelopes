@@ -1,4 +1,4 @@
-const pg = require('node-postgres');
+const pg = require('pg');
 
 const pool = new pg.Pool({
     host: 'localhost',
