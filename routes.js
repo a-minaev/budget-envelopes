@@ -18,11 +18,11 @@ router.param('id', (req, res, next, id) => {
 
 router.get('/envelopes', getEnvelopes);
 
-router.get('/envelope/:id', getEnvelope);
+router.get('/envelopes/:id', getEnvelope);
 
-router.put('/envelope/:id/deposit', deposit);
+router.put('/envelopes/:id/deposit', deposit);
 
-router.put('/envelope/:id/withdraw', verifyBalance, withdrawAmount);
+router.put('/envelopes/:id/withdraw', verifyBalance, withdrawAmount);
 
 router.put('/transfer', verifyBalance, transferAmount);
 
