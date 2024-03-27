@@ -37,13 +37,21 @@ const deposit = ((req, res, next) => {
 
 const verifyBalance = ((req, res, next) => {
     //add functionality for transfers
-
-    pool.query('SELECT * FROM envelopes WHERE id=$1 AND amount>=$2', [req.id, req.query.amount], (error, results) => {
-        if(error){
-            next(error);
-        }
-        else next();
-    })
+    if(req.id){
+        pool.query('SELECT * FROM envelopes WHERE id=$1 AND amount>=$2', [req.id, req.query.amount], (error, results) => {
+            if(error){
+                next(error);
+            }
+            else next();
+        })
+    } else{
+        pool.query('SELECT * FROM envelopes WHERE id=$1 AND amount>=$2', [req.query.accountFrom, req.query.amount], (error, results) => {
+            if(error){
+                next(error);
+            }
+            else next();
+        })
+    }
 })
 
 const withdrawAmount = ((req, res, next) => {
